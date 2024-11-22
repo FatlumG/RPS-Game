@@ -1,13 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Seymour+One&display=swap");
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Seymour One", sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: #7ebefa;
+  color: white;
+  text-shadow: 5px 0px black;
+  overflow: hidden;
+  user-select: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.game-content h1 {
+  font-size: 3rem;
+  color: white;
+}
+
+.hand {
+  position: absolute;
+  z-index: -1;
+}
+
+.ai-hand {
+  width: 30vw;
+  top: 40px;
+  left: -120px;
+  transform: rotate(40deg);
+}
+
+.human-hand {
+  width: 30vw;
+  top: 0;
+  right: -150px;
+  transform: rotate(140deg) rotateX(180deg);
+}
+
+.scores {
+  display: flex;
+  justify-content: center;
+  gap: 200px;
+  line-height: 20px;
+}
+
+.scores p {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.scores .score {
+  font-size: 3rem;
+}
+
+.result {
+  margin-top: 170px !important;
+  margin-bottom: 30px;
+  text-align: center;
+  margin-top: 100px;
+  font-size: 2.7rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.buttons button {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  border-radius: 100%;
+  transition: all 0.4s ease;
+}
+
+.buttons button:hover {
+  background-color: #a4ee98;
+  cursor: pointer;
+}
+
+.buttons button img {
+  width: 150px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-10%);
+
+  transition: all 0.3s ease;
+}
+
+.buttons button:hover img {
+  transform: rotate(20deg) scale(1.1);
+}
+
+.game-nav {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 1rem;
+}
+
+.game-nav button {
+  font-family: inherit;
+  width: 170px;
+  height: 55px;
+  background-color: white;
+  font-size: 1rem;
+  text-wrap: nowrap;
+  cursor: pointer;
+}
+
+.next-round {
+  border: 2px solid #000;
+  border-bottom: #fff;
+  border-left: #fff;
+  box-shadow: 4px 4px 0 0 #000, inset 4px -7px 0 0#c2c2c2;
+}
+
+.restart {
+  box-shadow: 4px 4px 0 0 #000, 2px -6px 0 0 #c2c2c2 inset;
+  border: 2px solid #000;
+}
+
+.shake {
+  animation: shake-animation 1s ease-in-out;
+}
+
+@keyframes shake-ai {
+  0% {
+    transform: rotate(30deg);
+  }
+  25% {
+    transform: rotate(50deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  75% {
+    transform: rotate(50deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
+}
+
+@keyframes shake-human {
+  0% {
+    transform: rotate(140deg) rotateX(180deg);
+  }
+  25% {
+    transform: rotate(160deg) rotateX(180deg);
+  }
+  50% {
+    transform: rotate(120deg) rotateX(180deg);
+  }
+  75% {
+    transform: rotate(160deg) rotateX(180deg);
+  }
+  100% {
+    transform: rotate(140deg) rotateX(180deg);
+  }
+}
+
+.ai-hand {
+  animation: shake-ai 0.6s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+.human-hand {
+  animation: shake-human 0.6s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+@media (max-width: 1024px) {
+  .game-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .ai-hand {
+    width: 50vw;
+    top: 200px;
+  }
+
+  .human-hand {
+    width: 50vw;
+    top: 200px;
+  }
+
+  .scores {
+    gap: 150px;
+    line-height: 20px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .buttons button {
+    top: 60px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .buttons button img {
+    width: 120px;
+  }
+}
+
+@media (max-width: 560px) {
+  .ai-hand {
+    width: 50vw;
+    top: 270px;
+    left: -60px;
+  }
+
+  .human-hand {
+    width: 50vw;
+    top: 270px;
+    right: -60px;
+  }
+
+  .scores {
+    gap: 120px;
+  }
+
+  .buttons {
+    gap: 20px;
+  }
+
+  .buttons button {
+    top: 0px;
+  }
 }
